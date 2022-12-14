@@ -1,8 +1,9 @@
 package laptrinhjavaweb.models.user;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class User extends AbstractModel<User> {
+public class User extends AbstractModel<User> implements Serializable {
 	private String login_name;
 	private String salt;
 	private String hashed_passwd;
