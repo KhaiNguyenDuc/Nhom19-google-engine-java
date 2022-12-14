@@ -37,8 +37,19 @@ public class CartController extends BaseController {
 	public ModelAndView Cart(HttpSession session) {
 		// User sameObject = (User) session.getAttribute("UserInfo");
 		// int Id = sameObject.getId();
-		
-		_mav.setViewName("user/Cart");
+		if (session != null)
+		{
+			HashMap<Long, Cart_Item> cart = (HashMap<Long, Cart_Item>) session.getAttribute("cart");
+			if (cart == null) {
+				cart = new HashMap<Long, Cart_Item>();
+			}
+			int totalQuantity = Integer.parseInt(String.valueOf(session.getAttribute("TotalQuantity")));
+			float totalPrice =  Float.parseFloat(String.valueOf(session.getAttribute("TotalPrice")));
+			_mav.addObject("TotalQuantity",totalQuantity);
+			_mav.addObject("TotalPrice",totalPrice);
+			_mav.addObject("cart",cart);
+			_mav.setViewName("user/Cart");
+		}
 		return _mav;
 	}
 
